@@ -92,6 +92,7 @@ Exemple : Gestion des Patients
 
 
 
+
 📊 Statistiques (Méthodes Statiques)
 
 Patient::calculateAverageAge(): float
