@@ -137,5 +137,28 @@ function supprimeMenu()
     echo "2. supprime un medeciant \n";
     echo "3. supprime un departement \n";
 
-    
+    $choicesupprime = trim(fgets(STDIN));
+    switch ($choicesupprime) {
+        case 1:
+            echo "mamr7bax biiiik";
+            break;
+        case 2:
+            echo "mamr7bax biiiik";
+            break;
+        case 3:
+            echo "ID ( departement ) : \n";
+            $id = trim(fgets(STDIN));
+            $department = new departement();
+            $name = $department->getDepartementId((int)$id);
+            echo "Verifier est-ce-que tu vaux supprime " . $name[0]['department_name'] . " (yes/no) :\n";
+            
+            $supprimeChose = trim(fgets(STDIN));
+            
+            if(strtoupper($supprimeChose) == "YES"){
+                $department->supprimeDepartment((int)$id);
+            }else{
+                echo "okk khod ra7tek ";
+            }
+            break;
+    }
 }
