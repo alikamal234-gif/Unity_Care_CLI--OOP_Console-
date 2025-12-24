@@ -69,7 +69,27 @@ function AfficheMenu()
     echo "1. affiche un patient \n";
     echo "2. affiche un medeciant \n";
     echo "3. affiche un departement \n";
-    
+    $choiceAffiche = trim(fgets(STDIN));
+
+    switch ($choiceAffiche) {
+        case 1:
+            echo "mamr7bax biiiik";
+            break;
+        case 2:
+            echo "mamr7bax biiiik";
+            break;
+        case 3:
+            $departementss = new departement("ali", "youcode");
+            print_r($departementss->getDepartement());
+            break;
+        case 4:
+            supprimeMenu();
+            break;
+        case 5:
+            echo "mamr7bax biiiik";
+            break;
+
+    }
 }
 
 function modifieMenu()
