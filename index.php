@@ -48,6 +48,11 @@ function AjouteMenu()
 
 function AfficheMenu()
 {
+    echo "========== Menu ====================\n";
+    echo "1. affiche un patient \n";
+    echo "2. affiche un medeciant \n";
+    echo "3. affiche un departement \n";
+   
 }
 
 function modifieMenu()
