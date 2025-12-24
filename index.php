@@ -100,7 +100,33 @@ function modifieMenu()
     echo "2. modifie un medeciant \n";
     echo "3. modifie un departement \n";
 
-    
+    $choicemodifie = trim(fgets(STDIN));
+    switch ($choicemodifie) {
+        case 1:
+            echo "mamr7bax biiiik";
+            break;
+        case 2:
+            echo "mamr7bax biiiik";
+            break;
+        case 3:
+            echo "ID ( departement ) : \n";
+            $id = trim(fgets(STDIN));
+            echo "Que veux-tu modufier ?\n1.name\n2.location\n";
+            $modufier = trim(fgets(STDIN));
+            $modofierChose = null;
+            
+            if($modufier == 1){
+                $modofierChose = "department_name";
+            }elseif($modofierChose == "location"){
+                $modofierChose = "location";
+            }
+            echo "change By : \n";
+            $change = trim(fgets(STDIN));
+            $department = new departement();
+            $department->ModifierDepartement($id,$modofierChose,$change);
+            break;
+
+    }
 }
 
 function supprimeMenu()
