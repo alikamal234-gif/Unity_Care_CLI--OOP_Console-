@@ -57,6 +57,12 @@ function AfficheMenu()
 
 function modifieMenu()
 {
+    system('cls');
+    echo "========== Menu ====================\n";
+    echo "1. modifie un patient \n";
+    echo "2. modifie un medeciant \n";
+    echo "3. modifie un departement \n";
+
     
 }
 
