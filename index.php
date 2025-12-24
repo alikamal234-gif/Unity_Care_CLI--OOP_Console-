@@ -43,7 +43,24 @@ function AjouteMenu()
     echo "1. ajoute un patient \n";
     echo "2. ajoute un medeciant \n";
     echo "3. ajoute un departement \n";
-    
+    $choiceAjoute = trim(fgets(STDIN));
+    switch ($choiceAjoute) {
+        case 1:
+            echo "mamr7bax biiiik";
+            break;
+        case 2:
+            echo "mamr7bax biiiik";
+            break;
+        case 3:
+            echo "name : \n";
+            $name = trim(fgets(STDIN));
+            echo "\nlocation : ";
+            $location = trim(fgets(STDIN));
+            $department = new departement($name, $location);
+            $department->setDepartement();
+            break;
+
+    }
 }
 
 function AfficheMenu()
@@ -52,7 +69,7 @@ function AfficheMenu()
     echo "1. affiche un patient \n";
     echo "2. affiche un medeciant \n";
     echo "3. affiche un departement \n";
-   
+    
 }
 
 function modifieMenu()
