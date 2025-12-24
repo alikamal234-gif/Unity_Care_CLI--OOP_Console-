@@ -38,6 +38,11 @@ switch ($choice) {
 
 function AjouteMenu()
 {
+    system('cls');
+    echo "========== Menu ====================\n";
+    echo "1. ajoute un patient \n";
+    echo "2. ajoute un medeciant \n";
+    echo "3. ajoute un departement \n";
     
 }
 
