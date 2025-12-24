@@ -68,6 +68,11 @@ function modifieMenu()
 
 function supprimeMenu()
 {
-    
+    system('cls');
+    echo "========== Menu ====================\n";
+    echo "1. supprime un patient \n";
+    echo "2. supprime un medeciant \n";
+    echo "3. supprime un departement \n";
+
     
 }
