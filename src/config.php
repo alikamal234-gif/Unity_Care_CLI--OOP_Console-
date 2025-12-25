@@ -20,15 +20,27 @@ class database
 }
 
 
-
-
-
 class person
 {
     public $FirstName;
     public $LastName;
     public $email;
     public $PhoneNumber;
+
+    public $conection;
+
+    public function __construct($FirstName=null,$LastName=null,$email=null,$PhoneNumber=null) {
+        $this->FirstName = $FirstName;
+        $this->LastName = $LastName;
+        $this->email = $email;
+        $this->PhoneNumber = $PhoneNumber;
+    }
+
+    public function GetPerson($tableName){
+        $this->conection =  new database();
+        return $this->conection->conn->query("SELECT * FROM $tableName ;")->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 
 }
@@ -46,27 +58,32 @@ class doctor extends person
     public $IdDepartement;
 }
 
-class departement extends database
+class departement
 {
     public $DepartementName;
     public $location;
+    public $conection;
+    
+
 
     public function __construct($deparname=null, $location=null)
     {
-        parent::__construct();
+        
         $this->DepartementName = $deparname;
         $this->location = $location;
     }
     public function getDepartement()
     {
-        return $this->conn->query("SELECT * FROM departments ;")->fetchAll(PDO::FETCH_ASSOC);
+        $this->conection =  new database();
+        return $this->conection->conn->query("SELECT * FROM departments ;")->fetchAll(PDO::FETCH_ASSOC);
     }
     public function setDepartement()
     {
+        $this->conection =  new database();
         $DepartementName = $this->DepartementName;
         $location = $this->location;
         try {
-            $stm = $this->conn->prepare("INSERT INTO departments(department_name,location) VALUES (:department_name , :location);");
+            $stm = $this->conection->conn->prepare("INSERT INTO departments(department_name,location) VALUES (:department_name , :location);");
             $stm->bindParam("department_name", $DepartementName);
             $stm->bindParam("location", $location);
             $stm->execute();
@@ -79,7 +96,8 @@ class departement extends database
 
     public function ModifierDepartement($id,$choix,$change){
         try{
-            $stm = $this->conn->prepare("UPDATE departments SET $choix=:change WHERE id_department =:id");
+            $this->conection =  new database();
+            $stm = $this->conection->conn->prepare("UPDATE departments SET $choix=:change WHERE id_department =:id");
         $stm->bindParam('change',$change);
         $stm->bindParam('id',$id);
         $stm->execute();
@@ -89,15 +107,16 @@ class departement extends database
     }
     public function getDepartementId($id)
     {
-        return $this->conn->query("SELECT * FROM departments WHERE id_department =$id;")->fetchAll(PDO::FETCH_ASSOC);
+        $this->conection =  new database();
+        return $this->conection->conn->query("SELECT * FROM departments WHERE id_department =$id;")->fetchAll(PDO::FETCH_ASSOC);
     }
     public function supprimeDepartment($id){
-        $stm = $this->conn->prepare("DELETE FROM `departments` WHERE id_department = :id");
+        $this->conection =  new database();
+        $stm = $this->conection->conn->prepare("DELETE FROM `departments` WHERE id_department = :id");
         $stm->bindParam('id',$id);
         $stm->execute();
     }
 }
-
 
 
 

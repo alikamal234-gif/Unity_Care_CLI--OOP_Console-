@@ -73,7 +73,8 @@ function AfficheMenu()
 
     switch ($choiceAffiche) {
         case 1:
-            echo "mamr7bax biiiik";
+            $patients = new patient();
+            print_r($patients->GetPerson('patients')) ;
             break;
         case 2:
             echo "mamr7bax biiiik";
