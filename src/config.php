@@ -20,7 +20,7 @@ class database
 }
 
 
-class person
+class Person
 {
     public $FirstName;
     public $LastName;
@@ -41,21 +41,50 @@ class person
         return $this->conection->conn->query("SELECT * FROM $tableName ;")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    public function SetPerson($tableName){
+        $this->conection =  new database();
+        
+    }
 
 }
 
-class patient extends person
+class patient extends Person
 {
     public $gender;
     public $DateOfBirth;
     public $adress;
+
+    public function __construct($FirstName=null,$LastName=null,$email=null,$PhoneNumber=null,$gender=null,$DateOfBirth=null,$adress=null) {
+        parent::__construct($FirstName,$LastName,$email,$PhoneNumber);
+        $this->gender = $gender;
+        $this->DateOfBirth = $DateOfBirth;
+        $this->adress = $adress;
+    }
+
+
+    public function SetPerson($tableName= 'patients'){
+        $this->conection =  new database();
+        $sql = "INSERT INTO $tableName (first_name,last_name,gender,email,date_of_birth,phone_number,address) 
+        VALUES ( :first_name, :last_name, :gender, :email, :date_of_birth, :phone_number , :adress); ";
+        $stm = $this->conection->conn->prepare($sql);
+        $stm->bindParam('first_name',$this->FirstName);
+        $stm->bindParam('last_name',$this->LastName);
+        $stm->bindParam('gender',$this->gender);
+        $stm->bindParam('email',$this->email);
+        $stm->bindParam('date_of_birth',$this->DateOfBirth);
+        $stm->bindParam('phone_number',$this->PhoneNumber);
+        $stm->bindParam('adress',$this->adress);
+        $stm->execute();
+
+    }
 }
 
-class doctor extends person
+class doctor extends Person
 {
     public $specialization;
     public $IdDepartement;
+
+    
 }
 
 class departement
