@@ -77,7 +77,8 @@ function AfficheMenu()
             print_r($patients->GetPerson('patients')) ;
             break;
         case 2:
-            echo "mamr7bax biiiik";
+            $doctor = new doctor();
+            print_r($doctor->GetPerson('departments')) ;
             break;
         case 3:
             $departementss = new departement("ali", "youcode");
