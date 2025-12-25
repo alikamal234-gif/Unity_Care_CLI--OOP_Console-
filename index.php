@@ -138,7 +138,7 @@ class Menu
         $choicemodifie = trim(fgets(STDIN));
         switch ($choicemodifie) {
             case 1:
-                echo "ID ( departement ) : \n";
+                echo "ID ( patient ) : \n";
                 $id = trim(fgets(STDIN));
                 echo "Que veux-tu modufier ?\n
                 1.first name\n2.last name\n
@@ -179,7 +179,41 @@ class Menu
 
                 break;
             case 2:
-                echo "mamr7bax biiiik";
+                echo "ID ( patient ) : \n";
+                $id = trim(fgets(STDIN));
+                echo "Que veux-tu modufier ?\n
+                1.first name\n2.last name\n
+                3.specialization\n4.email\n
+                \n5.phone number\n6.address\n";
+                $modufier = trim(fgets(STDIN));
+                $modofierChose = null;
+
+                switch((int)$modufier){
+                    case 1:
+                        $modofierChose = "first_name";
+                        break;
+                    case 2:
+                        $modofierChose = "last_name";
+                        break;
+                    case 3:
+                        $modofierChose = "specialization";
+                        break;
+                    case 4:
+                        $modofierChose = "email";
+                        break;
+                    case 5:
+                        $modofierChose = "phone_number";
+                        break;
+                    case 6:
+                        $modofierChose = "id_department";
+                        break;
+                }
+                 echo "change By : \n";
+                $change = trim(fgets(STDIN));
+                $patient = new Person();
+                $patient->ModifierPersont("doctors",$id,"id_doctor",$modofierChose,$change);
+                        
+
                 break;
             case 3:
                 echo "ID ( departement ) : \n";
