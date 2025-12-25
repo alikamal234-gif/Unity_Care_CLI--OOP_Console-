@@ -58,6 +58,21 @@ class Person
         $stm->execute();
     }
 
+
+    public function ModifierPersont($table ,$id,$columnID, $choix, $change)
+    {
+        try {
+            $this->conection = new database();
+            $stm = $this->conection->conn->prepare("UPDATE $table SET $choix=:change WHERE $columnID =:id");
+            $stm->bindParam('change', $change);
+            $stm->bindParam('id', $id);
+            $stm->execute();
+            echo "change est successful 👀";
+        } catch (Exception $e) {
+            echo "modufication failed try again !!";
+        }
+    }
+
 }
 
 class patient extends Person

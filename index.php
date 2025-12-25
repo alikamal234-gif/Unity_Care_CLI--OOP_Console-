@@ -130,7 +130,6 @@ class Menu
 
     function modifieMenu()
     {
-        system('cls');
         echo "========== Menu ====================\n";
         echo "1. modifie un patient \n";
         echo "2. modifie un medeciant \n";
@@ -139,7 +138,45 @@ class Menu
         $choicemodifie = trim(fgets(STDIN));
         switch ($choicemodifie) {
             case 1:
-                echo "mamr7bax biiiik";
+                echo "ID ( departement ) : \n";
+                $id = trim(fgets(STDIN));
+                echo "Que veux-tu modufier ?\n
+                1.first name\n2.last name\n
+                3.gender\n4.email\n
+                5.date of birthday\n6.phone number\n
+                7.address\n";
+                $modufier = trim(fgets(STDIN));
+                $modofierChose = null;
+
+                switch((int)$modufier){
+                    case 1:
+                        $modofierChose = "first_name";
+                        break;
+                    case 2:
+                        $modofierChose = "last_name";
+                        break;
+                    case 3:
+                        $modofierChose = "gender";
+                        break;
+                    case 4:
+                        $modofierChose = "email";
+                        break;
+                    case 5:
+                        $modofierChose = "date_of_bidth";
+                        break;
+                    case 6:
+                        $modofierChose = "phone_number";
+                        break;
+                    case 7:
+                        $modofierChose = "address";
+                        break;
+                }
+                 echo "change By : \n";
+                $change = trim(fgets(STDIN));
+                $patient = new Person();
+                $patient->ModifierPersont("patients",$id,"id_patient",$modofierChose,$change);
+                        
+
                 break;
             case 2:
                 echo "mamr7bax biiiik";
