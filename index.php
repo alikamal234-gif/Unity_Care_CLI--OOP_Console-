@@ -182,7 +182,11 @@ class Menu
                 $patient->DeletPerson("patients",(int)$id,"id_patient");
                 break;
             case 2:
-                
+                echo "ID ( departement ) : \n";
+                $id = trim(fgets(STDIN));
+                $patient = new Person();
+                $patient->DeletPerson("doctors",(int)$id,"id_doctor");
+                break;
             case 3:
                 echo "ID ( departement ) : \n";
                 $id = trim(fgets(STDIN));
