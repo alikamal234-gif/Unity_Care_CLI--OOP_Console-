@@ -49,6 +49,15 @@ class Person
 
     }
 
+    public function DeletPerson($table, $id,$columnID)
+    {
+        $this->conection = new database();
+        $sql = "DELETE FROM $table WHERE $columnID= :id";
+        $stm = $this->conection->conn->prepare($sql);
+        $stm->bindParam('id', $id);
+        $stm->execute();
+    }
+
 }
 
 class patient extends Person
@@ -82,11 +91,13 @@ class patient extends Person
             $stm->bindParam('adress', $this->adress);
             $stm->execute();
             echo "ajouter est successful 👀\n";
-        }catch(Exception $ERROR){
-            echo 'error de ajoute !!';
+        } catch (Exception $ERROR) {
+            echo 'error de ajoute !!💩';
         }
 
     }
+
+    
 }
 
 class doctor extends Person
@@ -118,7 +129,7 @@ class doctor extends Person
             $stm->execute();
             echo "ajouter est successful 👀\n";
         } catch (Exception $error) {
-            echo 'error de ajoute !!';
+            echo 'error de ajoute !! 💩';
         }
     }
 

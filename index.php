@@ -70,7 +70,6 @@ class Menu
                 $this->MenuPrincipal();
                 break;
             case 2:
-
                 echo "First name : \n";
                 $firstName = trim(fgets(STDIN));
                 echo "Last name : \n";
@@ -177,11 +176,13 @@ class Menu
         $choicesupprime = trim(fgets(STDIN));
         switch ($choicesupprime) {
             case 1:
-                echo "mamr7bax biiiik";
+                echo "ID ( patient ) : \n";
+                $id = trim(fgets(STDIN));
+                $patient = new Person();
+                $patient->DeletPerson("patients",(int)$id,"id_patient");
                 break;
             case 2:
-                echo "mamr7bax biiiik";
-                break;
+                
             case 3:
                 echo "ID ( departement ) : \n";
                 $id = trim(fgets(STDIN));
