@@ -291,7 +291,7 @@ class Menu
         echo "\n=========== moyen age ===========\n";
         echo "moyen age de patients : " . $statistique->AgeMoyen("patients") ." \n";
         echo "\n=========== grande age ===========\n";
-        echo "grande age de patients : ";
+        echo "grande age de patients : " . $statistique->grandAge("patients") ." \n";
         echo "\n=========== petit age ===========\n";
         echo "petit age de patients : ";
         $this->MenuPrincipal();
