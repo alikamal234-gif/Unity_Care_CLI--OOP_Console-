@@ -286,7 +286,7 @@ class Menu
         $statistique = new Person(); 
         echo "=========== Total ===========\n";
         echo "Total of patients : " . $statistique->totalePerson("patients") ." \n";
-        echo "Total of doctors : " ;
+        echo "Total of doctors : " . $statistique->totalePerson("doctors") ." \n";
         echo "Total of departments : " ;
         echo "\n=========== moyen age ===========\n";
         echo "moyen age de patients : " ;
