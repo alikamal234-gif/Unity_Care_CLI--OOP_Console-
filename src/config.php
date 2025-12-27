@@ -6,7 +6,7 @@ class database
     private $user = 'root';
     private $password = '';
     private $dbname = 'hospital';
-    public $conn;
+    public PDO $conn;
 
     public function __construct()
     {
@@ -73,6 +73,34 @@ class Person
         }
     }
 
+    public function totalePerson($table){
+        $this->conection = new database();
+        return $this->conection->conn->query("SELECT count(*) FROM $table")->fetchColumn();
+    }
+    public function AgeMoyen($table){
+        $this->conection = new database();
+        $stm = $this->conection->conn->query("SELECT AVG(TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE())) AS age_moyen FROM $table");
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        return round($result['age_moyen'], 2);
+    }
+
+    public function grandAge($table){
+        $sql = "SELECT * FROM $table ORDER BY TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) DESC LIMIT 1";
+        $stm = $this->conection->conn->query($sql);
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        return "\n\nid : " .$result['id_patient'] ."\nfirst_name : ".$result['first_name'] ."\ndate of birthday : ".  $result['date_of_birth'] . "\n\n";
+    }
+    public function petitAge($table){
+        $sql = "SELECT * FROM $table ORDER BY TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) ASC LIMIT 1";
+        $stm = $this->conection->conn->query($sql);
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        return "\n\nid : " .$result['id_patient'] ."\nfirst_name : ".$result['first_name'] ."\ndate of birthday : ".  $result['date_of_birth'] . "\n\n";
+    }
+
+    public function Validation(){
+
+    }
+    
 }
 
 class patient extends Person
@@ -81,6 +109,7 @@ class patient extends Person
     public $DateOfBirth;
     public $adress;
 
+    
     public function __construct($FirstName = null, $LastName = null, $email = null, $PhoneNumber = null, $gender = null, $DateOfBirth = null, $adress = null)
     {
         parent::__construct($FirstName, $LastName, $email, $PhoneNumber);
@@ -88,6 +117,7 @@ class patient extends Person
         $this->DateOfBirth = $DateOfBirth;
         $this->adress = $adress;
     }
+
 
 
     public function SetPerson($tableName = 'patients')

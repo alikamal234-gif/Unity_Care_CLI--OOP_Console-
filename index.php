@@ -33,7 +33,7 @@ class Menu
                 $this->supprimeMenu();
                 break;
             case 5:
-                echo "mamr7bax biiiik";
+                $this->statistique();
                 break;
             case 6:
                 exit;
@@ -93,6 +93,7 @@ class Menu
                 $location = trim(fgets(STDIN));
                 $department = new departement($name, $location);
                 $department->setDepartement();
+                $this->MenuPrincipal();
                 break;
         }
     }
@@ -176,7 +177,7 @@ class Menu
                 $patient = new Person();
                 $patient->ModifierPersont("patients",$id,"id_patient",$modofierChose,$change);
                         
-
+                $this->MenuPrincipal();
                 break;
             case 2:
                 echo "ID ( patient ) : \n";
@@ -213,7 +214,7 @@ class Menu
                 $patient = new Person();
                 $patient->ModifierPersont("doctors",$id,"id_doctor",$modofierChose,$change);
                         
-
+                $this->MenuPrincipal();
                 break;
             case 3:
                 echo "ID ( departement ) : \n";
@@ -231,6 +232,7 @@ class Menu
                 $change = trim(fgets(STDIN));
                 $department = new departement();
                 $department->ModifierDepartement($id, $modofierChose, $change);
+                $this->MenuPrincipal();
                 break;
 
         }
@@ -251,12 +253,15 @@ class Menu
                 $id = trim(fgets(STDIN));
                 $patient = new Person();
                 $patient->DeletPerson("patients",(int)$id,"id_patient");
+                $this->MenuPrincipal();
                 break;
+
             case 2:
                 echo "ID ( departement ) : \n";
                 $id = trim(fgets(STDIN));
                 $patient = new Person();
                 $patient->DeletPerson("doctors",(int)$id,"id_doctor");
+                $this->MenuPrincipal();
                 break;
             case 3:
                 echo "ID ( departement ) : \n";
@@ -272,8 +277,24 @@ class Menu
                 } else {
                     echo "okk khod ra7tek ";
                 }
+                $this->MenuPrincipal();
                 break;
         }
+    }
+
+    public function statistique(){
+        $statistique = new Person(); 
+        echo "=========== Total ===========\n";
+        echo "Total of patients : " . $statistique->totalePerson("patients") ." \n";
+        echo "Total of doctors : " ;
+        echo "Total of departments : " ;
+        echo "\n=========== moyen age ===========\n";
+        echo "moyen age de patients : " ;
+        echo "\n=========== grande age ===========\n";
+        echo "grande age de patients : ";
+        echo "\n=========== petit age ===========\n";
+        echo "petit age de patients : ";
+        $this->MenuPrincipal();
     }
 
 }
