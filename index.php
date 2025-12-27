@@ -289,7 +289,7 @@ class Menu
         echo "Total of doctors : " . $statistique->totalePerson("doctors") ." \n";
         echo "Total of departments : " . $statistique->totalePerson("departments") ." \n";
         echo "\n=========== moyen age ===========\n";
-        echo "moyen age de patients : " ;
+        echo "moyen age de patients : " . $statistique->AgeMoyen("patients") ." \n";
         echo "\n=========== grande age ===========\n";
         echo "grande age de patients : ";
         echo "\n=========== petit age ===========\n";
