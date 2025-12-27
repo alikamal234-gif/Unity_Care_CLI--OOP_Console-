@@ -293,7 +293,7 @@ class Menu
         echo "\n=========== grande age ===========\n";
         echo "grande age de patients : " . $statistique->grandAge("patients") ." \n";
         echo "\n=========== petit age ===========\n";
-        echo "petit age de patients : ";
+        echo "petit age de patients : " . $statistique->petitAge("patients") ." \n";
         $this->MenuPrincipal();
     }
 
