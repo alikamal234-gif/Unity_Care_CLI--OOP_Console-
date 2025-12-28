@@ -82,7 +82,7 @@ class Menu
                 $specialization = trim(fgets(STDIN));
                 echo "id_department : (+15) \n";
                 $id_department = trim(fgets(STDIN));
-                $doctor = new doctor($firstName, $LastName, $email, $phone,$specialization,(int)$id_department);
+                $doctor = new doctor($firstName, $LastName, $email, $phone, $specialization, (int) $id_department);
                 $doctor->SetPerson();
                 $this->MenuPrincipal();
                 break;
@@ -108,17 +108,65 @@ class Menu
         switch ($choiceAffiche) {
             case 1:
                 $patients = new patient();
-                print_r($patients->GetPerson('patients'));
+                $data = $patients->GetPerson('patients');
+
+                $headers = ["ID", "Prénom", "Nom", "Email", "Téléphone","Gender","date of birthday","address"];
+                $rows = [];
+
+                foreach ($data as $p) {
+                    $rows[] = [
+                        $p['id_patient'],
+                        $p['first_name'],
+                        $p['last_name'],
+                        $p['email'],
+                        $p['phone_number'],
+                        $p['gender'],
+                        $p['date_of_birth'],
+                        $p['address']
+                    ];
+                }
+
+                afficherTable($headers, $rows);
                 $this->MenuPrincipal();
                 break;
             case 2:
                 $doctor = new doctor();
-                print_r($doctor->GetPerson('departments'));
+                $data = $doctor->GetPerson('doctors');
+
+                $headers = ["ID", "Prénom", "Nom", "Email", "Téléphone","Specialization","ID departement"];
+                $rows = [];
+
+                foreach ($data as $p) {
+                    $rows[] = [
+                        $p['id_doctor'],
+                        $p['first_name'],
+                        $p['last_name'],
+                        $p['email'],
+                        $p['phone_number'],
+                        $p['specialization'],
+                        $p['id_department'],
+                    ];
+                }
+
+                afficherTable($headers, $rows);
                 $this->MenuPrincipal();
                 break;
             case 3:
-                $departementss = new departement("ali", "youcode");
-                print_r($departementss->getDepartement());
+                $doctor = new doctor();
+                $data = $doctor->GetPerson('doctors');
+
+                $headers = ["ID", "Department Name", "Location"];
+                $rows = [];
+
+                foreach ($data as $p) {
+                    $rows[] = [
+                        $p['id_department'],
+                        $p['department_name'],
+                        $p['location'],
+                    ];
+                }
+
+                afficherTable($headers, $rows);
                 $this->MenuPrincipal();
                 break;
             case 4:
@@ -149,7 +197,7 @@ class Menu
                 $modufier = trim(fgets(STDIN));
                 $modofierChose = null;
 
-                switch((int)$modufier){
+                switch ((int) $modufier) {
                     case 1:
                         $modofierChose = "first_name";
                         break;
@@ -172,11 +220,11 @@ class Menu
                         $modofierChose = "address";
                         break;
                 }
-                 echo "change By : \n";
+                echo "change By : \n";
                 $change = trim(fgets(STDIN));
                 $patient = new Person();
-                $patient->ModifierPersont("patients",$id,"id_patient",$modofierChose,$change);
-                        
+                $patient->ModifierPersont("patients", $id, "id_patient", $modofierChose, $change);
+
                 $this->MenuPrincipal();
                 break;
             case 2:
@@ -189,7 +237,7 @@ class Menu
                 $modufier = trim(fgets(STDIN));
                 $modofierChose = null;
 
-                switch((int)$modufier){
+                switch ((int) $modufier) {
                     case 1:
                         $modofierChose = "first_name";
                         break;
@@ -209,11 +257,11 @@ class Menu
                         $modofierChose = "id_department";
                         break;
                 }
-                 echo "change By : \n";
+                echo "change By : \n";
                 $change = trim(fgets(STDIN));
                 $patient = new Person();
-                $patient->ModifierPersont("doctors",$id,"id_doctor",$modofierChose,$change);
-                        
+                $patient->ModifierPersont("doctors", $id, "id_doctor", $modofierChose, $change);
+
                 $this->MenuPrincipal();
                 break;
             case 3:
@@ -252,7 +300,7 @@ class Menu
                 echo "ID ( patient ) : \n";
                 $id = trim(fgets(STDIN));
                 $patient = new Person();
-                $patient->DeletPerson("patients",(int)$id,"id_patient");
+                $patient->DeletPerson("patients", (int) $id, "id_patient");
                 $this->MenuPrincipal();
                 break;
 
@@ -260,7 +308,7 @@ class Menu
                 echo "ID ( departement ) : \n";
                 $id = trim(fgets(STDIN));
                 $patient = new Person();
-                $patient->DeletPerson("doctors",(int)$id,"id_doctor");
+                $patient->DeletPerson("doctors", (int) $id, "id_doctor");
                 $this->MenuPrincipal();
                 break;
             case 3:
@@ -282,18 +330,19 @@ class Menu
         }
     }
 
-    public function statistique(){
-        $statistique = new Person(); 
+    public function statistique()
+    {
+        $statistique = new Person();
         echo "=========== Total ===========\n";
-        echo "Total of patients : " . $statistique->totalePerson("patients") ." \n";
-        echo "Total of doctors : " . $statistique->totalePerson("doctors") ." \n";
-        echo "Total of departments : " . $statistique->totalePerson("departments") ." \n";
+        echo "Total of patients : " . $statistique->totalePerson("patients") . " \n";
+        echo "Total of doctors : " . $statistique->totalePerson("doctors") . " \n";
+        echo "Total of departments : " . $statistique->totalePerson("departments") . " \n";
         echo "\n=========== moyen age ===========\n";
-        echo "moyen age de patients : " . $statistique->AgeMoyen("patients") ." \n";
+        echo "moyen age de patients : " . $statistique->AgeMoyen("patients") . " \n";
         echo "\n=========== grande age ===========\n";
-        echo "grande age de patients : " . $statistique->grandAge("patients") ." \n";
+        echo "grande age de patients : " . $statistique->grandAge("patients") . " \n";
         echo "\n=========== petit age ===========\n";
-        echo "petit age de patients : " . $statistique->petitAge("patients") ." \n";
+        echo "petit age de patients : " . $statistique->petitAge("patients") . " \n";
         $this->MenuPrincipal();
     }
 
@@ -303,3 +352,44 @@ $menu = new Menu();
 $menu->MenuPrincipal();
 
 
+function afficherTable($headers, $rows)
+{
+    // largeur des colonnes
+    $widths = [];
+
+    foreach ($headers as $i => $header) {
+        $widths[$i] = strlen($header);
+    }
+
+    foreach ($rows as $row) {
+        foreach ($row as $i => $cell) {
+            $widths[$i] = max($widths[$i], strlen($cell));
+        }
+    }
+
+    // ligne séparatrice
+    $line = "+";
+    foreach ($widths as $w) {
+        $line .= str_repeat("-", $w + 2) . "+";
+    }
+
+    // header
+    echo $line . PHP_EOL;
+    echo "|";
+    foreach ($headers as $i => $header) {
+        echo " " . str_pad($header, $widths[$i]) . " |";
+    }
+    echo PHP_EOL;
+    echo $line . PHP_EOL;
+
+    // rows
+    foreach ($rows as $row) {
+        echo "|";
+        foreach ($row as $i => $cell) {
+            echo " " . str_pad($cell, $widths[$i]) . " |";
+        }
+        echo PHP_EOL;
+    }
+
+    echo $line . PHP_EOL;
+}
